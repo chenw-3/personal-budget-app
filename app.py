@@ -45,14 +45,18 @@ def plot_expense_breakdown(categorized, limits):
     actuals = [categorized[k] for k in categories]
     colors = []
 
-    for k in categories:
-        ratio = categorized[k] / limits[k]
-        if ratio <= 1.0:
-            colors.append("green")
-        elif ratio <= 1.2:
-            colors.append("yellow")
-        else:
-            colors.append("red")
+for k in categories:
+    limit = limits[k]
+    if limit == 0:
+        colors.append("grey")  # No budget set, neutral color
+        continue
+    ratio = categorized[k] / limit
+    if ratio <= 1.0:
+        colors.append("green")
+    elif ratio <= 1.2:
+        colors.append("yellow")
+    else:
+        colors.append("red")
 
     fig, ax = plt.subplots()
     ax.bar(categories, actuals, color=colors)
