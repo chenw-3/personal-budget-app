@@ -56,7 +56,7 @@ def plot_expense_breakdown(categorized, limits):
         elif ratio <= 1.2:
             colors.append("yellow")
         else:
-        colors.append("red")
+            colors.append("red")
 
     fig, ax = plt.subplots()
     ax.bar(categories, actuals, color=colors)
