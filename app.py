@@ -113,7 +113,11 @@ plot_expense_breakdown(categorized, limits)
 # Summary Recommendations
 st.markdown("### 💡 Spending Suggestions")
 for category, amount in categorized.items():
-    ratio = amount / limits[category]
+    limit = limits[category]
+    if limit == 0:
+        st.info(f"ℹ️ No income set — can't evaluate **{category}** spending.")
+        continue
+    ratio = amount / limit
     if ratio > 1.2:
         st.error(f"⚠️ You are overspending in **{category}**. Consider reducing your spending.")
     elif ratio > 1.0:
